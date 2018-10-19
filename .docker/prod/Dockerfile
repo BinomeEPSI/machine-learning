@@ -1,7 +1,11 @@
-FROM ml-prod
+FROM php:7.2-apache as installer
 
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
+        libpng-dev \
         git subversion mercurial bash patch
+
+
+RUN docker-php-ext-install gd && docker-php-ext-enable gd
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /tmp
@@ -22,3 +26,25 @@ RUN curl --silent --fail --location --retry 3 --output /tmp/installer.php --url 
 
 
 ENV ENVIRONMENT INSTALLER
+
+WORKDIR /var/www/
+
+COPY ./app /var/www/
+
+RUN composer install --no-ansi --no-dev --no-interaction --no-scripts --optimize-autoloader
+
+RUN find /var/www/ -maxdepth 1 -type f -delete
+RUN rm -R /var/www/tests
+
+FROM php:7.2-apache
+
+COPY --from=installer /var/www/ /var/www/
+
+RUN apt-get update && apt-get install -y \
+        libpng-dev \
+    && docker-php-ext-install gd && docker-php-ext-enable gd \
+    && chown -R www-data /var/www/
+
+ENV ENVIRONMENT PROD
+
+WORKDIR /var/www/
