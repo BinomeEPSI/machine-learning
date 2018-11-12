@@ -1,2 +1,19 @@
 {
+  "version": 2,
+  "github": {
+    "enabled": "true"
+  },
+  "builds": [
+    {
+      "src": "./app/**/*.php",
+      "use": "@now/php"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "./app/html/index.php",
+      "status": 200
+    }
+  ]
 }
