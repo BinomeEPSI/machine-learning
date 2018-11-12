@@ -1,7 +1,7 @@
 {
-	"name": "oRiamn/machine-learning",
+	"name": "EPSIBordeaux/machine-learning",
 	"description": "Simple PHP implementation of machine learning concept.",
-	"homepage": "https://github.com/oRiamn/machine-learning",
+	"homepage": "https://github.com/EPSIBordeaux/machine-learning",
 	"license": "MIT",
 	"version": "0.0.1",
 	"keywords": [
