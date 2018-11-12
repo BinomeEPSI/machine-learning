@@ -1,0 +1,23 @@
+{
+  "github": {
+    "enabled": "true"
+  },
+  "version": 2,
+  "builds": [
+    {
+      "src": "*.php",
+      "use": "@now/php"
+    },
+    {
+      "src": "*.html",
+      "use": "@now/html-minifier"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/app/html/index.php",
+      "status": 200
+    }
+  ]
+}
