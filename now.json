@@ -12,7 +12,7 @@
   "routes": [
     {
       "src": "/",
-      "dest": "./app/html/index.php",
+      "dest": "/app/html/index.php",
       "status": 200
     }
   ]
